@@ -26,11 +26,7 @@
 | MediaTailor |视频中间定制广告|NO|
 | Device&Software | 视频硬件部署 |NO|
 
-### 实施方案
 
-前端录制好的视频，使用[Amazon S3](https://amazonaws-china.com/cn/s3/?nc2=h_m1)服务来进行视频存储  
-使用开源机器学习框架，根据预设条件构建视频分析结果  
-使用[Kinesis Video Streams](https://amazonaws-china.com/cn/kinesis/video-streams/?nc2=h_m1)的HTTP实时流(HLS)功能将视频流式传输给企业端，提供人工审核
 ## Aliyun视频服务
 
 ### 概览
@@ -46,3 +42,15 @@
 ### 服务适用场景
 
 阿里云端使用场景描述较少，需要进一步深入的去看文档。
+
+## 最佳实践
+
+### 实施方案
+
+前端录制好的视频，首先存储在用户本地的设备上，用户确认上传版本后，  
+使用[Amazon S3](https://amazonaws-china.com/cn/s3/?nc2=h_m1)服务来进行视频上传，将视频按照用户&设备&题目&时间戳&等进行索引存储。  
+
+使用开源机器学习框架，根据预设条件构建视频分析结果，  
+将结果存储于我们逻辑数据库[Amazon RDS](https://amazonaws-china.com/cn/rds/?nc2=h_m1)的表中，供之后的业务场景使用。  
+
+使用[AWS Kinesis Video Streams](https://amazonaws-china.com/cn/kinesis/video-streams/?nc2=h_m1)的HTTP实时流(HLS)功能将视频流式传输给企业端，提供人工审核
